@@ -1,5 +1,17 @@
 # Homework 01
 
+- [Homework 01](#homework-01)
+- [书生·浦语大模型全链路开源体系 - 陈恺(上海人工智能实验室)](#书生浦语大模型全链路开源体系---陈恺上海人工智能实验室)
+- [InternLM2 Technical Report 技术报告](#internlm2-technical-report-技术报告)
+  - [Infrastructure](#infrastructure)
+  - [Pre-train](#pre-train)
+    - [pre-training data](#pre-training-data)
+    - [Pre-training Settings](#pre-training-settings)
+    - [Pre-training Phases](#pre-training-phases)
+  - [Alignment](#alignment)
+  - [Evaluation and Analysis](#evaluation-and-analysis)
+  - [Conclusion](#conclusion)
+
 
 # [书生·浦语大模型全链路开源体系 - 陈恺(上海人工智能实验室)](https://www.bilibili.com/video/BV1Vx421X72D/)
 
@@ -101,20 +113,35 @@
 3. Reward Hacking 指的是在强化学习环境中，智能体发现了一种方式来获取高奖励，但这种方式并不符合设计者的意图或目标
    1. 例子 - 游戏智能体发现它可以通过困在某个游戏角落不断获得小量得分，而避免进行更复杂的游戏策略来赢取更大的奖励
    2. 问题 - 不符合期望、缺乏泛化、难以预测
+<!-- TOC -->
+<!-- TOC -->
 
-## 1. Introduction
+- [Homework 01](#homework-01)
+- [书生·浦语大模型全链路开源体系 - 陈恺(上海人工智能实验室)](#书生浦语大模型全链路开源体系---陈恺上海人工智能实验室)
+- [InternLM2 Technical Report 技术报告](#internlm2-technical-report-技术报告)
+  - [Infrastructure](#infrastructure)
+  - [Pre-train](#pre-train)
+    - [pre-training data](#pre-training-data)
+    - [Pre-training Settings](#pre-training-settings)
+    - [Pre-training Phases](#pre-training-phases)
+  - [Alignment](#alignment)
+  - [Evaluation and Analysis](#evaluation-and-analysis)
+  - [Conclusion](#conclusion)
 
-several notable open-source LLMs
-1. LLaMA
-2. Qwen
-3. Mistral
-4. Deepseek
+<!-- /TOC -->能实验室)](#书生浦语大模型全链路开源体系---陈恺上海人工智能实验室)
+- [Homework 01](#homework-01)
+- [书生·浦语大模型全链路开源体系 - 陈恺(上海人工智能实验室)](#书生浦语大模型全链路开源体系---陈恺上海人工智能实验室)
+- [InternLM2 Technical Report 技术报告](#internlm2-technical-report-技术报告)
+  - [Infrastructure](#infrastructure)
+  - [Pre-train](#pre-train)
+    - [pre-training data](#pre-training-data)
+    - [Pre-training Settings](#pre-training-settings)
+    - [Pre-training Phases](#pre-training-phases)
+  - [Alignment](#alignment)
+  - [Evaluation and Analysis](#evaluation-and-analysis)
+  - [Conclusion](#conclusion)
 
-main phase
-1. **pre-training** : based on leveraging a vast corpus of natural text, amassing trillions of tokens
-2. **supervised fine-tuning** SFT : 
-3. **reinforcement learning from human feedback** RLHF : 
-
+<!-- /TOC -->
 downstream applications rely on long contexts
 1. **Retrieval-Augmented Generation (RAG)** 检索增强生成
 2. agents
@@ -142,7 +169,7 @@ introduce **COnditional OnLine RLHF (COOL RLHF)**
 
 
 
-## 2. Infrastructure
+## Infrastructure
 
 the training framework - **InternEvo**
 1. framework enables us to scale model training across thousands of GPUs
@@ -194,7 +221,7 @@ Model FLOPs Utilization (MFU) - 模型浮点运算数的利用率 - 衡量模型
 
 
 
-## 3. Pre-train
+## Pre-train
 
 ### pre-training data
 
@@ -294,11 +321,11 @@ corpora复数形式，单数为corpus。NLP 中，corpus 是一组语言实例�
 1. The utilization of extended context windows significantly enhances the performance of Large Language Models in a variety of applications
 2. our training process for InternLM2 begins with a 4K context corpus and subsequently transitions to a corpus with 32K context
 
-## 4. Alignment
+## Alignment
 
-## 5. Evaluation and Analysis
+## Evaluation and Analysis
 
-## 6. Conclusion
+## Conclusion
 
 未完待续
 
