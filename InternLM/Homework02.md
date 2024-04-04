@@ -1,12 +1,42 @@
 # Homework & Note 02
 
+前面是作业，后面是笔记
+
+---
+
+# 目录
+
+- [Homework \& Note 02](#homework--note-02)
+- [目录](#目录)
+- [作业](#作业)
+  - [01 基础作业](#01-基础作业)
+    - [使用 InternLM2-Chat-1.8B 模型生成 300 字的小故事（需截图）](#使用-internlm2-chat-18b-模型生成-300-字的小故事需截图)
+  - [02 进阶作业](#02-进阶作业)
+    - [熟悉 huggingface 下载功能，使用 huggingface\_hub python 包，下载 InternLM2-Chat-7B 的 config.json 文件到本地（需截图下载过程）](#熟悉-huggingface-下载功能使用-huggingface_hub-python-包下载-internlm2-chat-7b-的-configjson-文件到本地需截图下载过程)
+    - [完成 浦语·灵笔2 的 图文创作 及 视觉问答 部署（需截图）](#完成-浦语灵笔2-的-图文创作-及-视觉问答-部署需截图)
+      - [图文创作](#图文创作)
+      - [视觉问答](#视觉问答)
+    - [完成 Lagent 工具调用 数据分析 Demo 部署（需截图）](#完成-lagent-工具调用-数据分析-demo-部署需截图)
+- [笔记 轻松玩转书生·浦语大模型趣味 Demo - 任宇鹏 角色扮演SIG](#笔记-轻松玩转书生浦语大模型趣味-demo---任宇鹏-角色扮演sig)
+  - [任务](#任务)
+  - [实战](#实战)
+    - [01 部署 InternLM2-Chat-1.8B 模型进行智能对话](#01-部署-internlm2-chat-18b-模型进行智能对话)
+    - [02 部署实战营优秀作品 八戒-Chat-1.8B 模型](#02-部署实战营优秀作品-八戒-chat-18b-模型)
+    - [03 通过 InternLM2-Chat-7B 运行 Lagent 智能体 Demo](#03-通过-internlm2-chat-7b-运行-lagent-智能体-demo)
+    - [04 实践部署 浦语·灵笔2 模型](#04-实践部署-浦语灵笔2-模型)
+      - [图文写作实战](#图文写作实战)
+      - [图片理解实战](#图片理解实战)
+
+
+
+
 ---
 
 # 作业
 
 停止开发机会重置 /root 外所有文件至开发机初始状态，请确保你的所有数据都存储在 /root 目录下
 
-## 基础作业
+## 01 基础作业
 
 ### 使用 InternLM2-Chat-1.8B 模型生成 300 字的小故事（需截图）
 
@@ -16,20 +46,58 @@
 
 ---
 
-## 进阶作业
+## 02 进阶作业
 
 ### 熟悉 huggingface 下载功能，使用 huggingface_hub python 包，下载 InternLM2-Chat-7B 的 config.json 文件到本地（需截图下载过程）
+
+[internlm/internlm2-chat-7b - huggingface官网](https://huggingface.co/internlm/internlm2-chat-7b)
+
+```python
+from huggingface_hub import hf_hub_download
+
+REPO_NAME = "internlm/internlm2-chat-7b"
+FILE_NAME = "config.json"
+
+filePath = hf_hub_download(repo_id=REPO_NAME, 
+                           filename=FILE_NAME)
+
+print("filePath - ", filePath)
+```
+
+![](Pics/InternLM027.png)
 
 
 ---
 
 ### 完成 浦语·灵笔2 的 图文创作 及 视觉问答 部署（需截图）
 
+#### 图文创作
+
+![](Pics/InternLM029.png)
+
+好像是统一生成完文字后再统一生成的图片
+
+---
+
+#### 视觉问答
+
+![](Pics/InternLM030.png)
+
+不能在一次对话里面问多个图片
+
+![](Pics/InternLM031.png)
+
+clear history 才能正确生成
+
+![](Pics/InternLM032.png)
+
 ---
 
 ### 完成 Lagent 工具调用 数据分析 Demo 部署（需截图）
 
+![](Pics/InternLM026.png)
 
+回答正确
 
 ---
 
@@ -331,6 +399,87 @@ sudo ssh -CNg -L 6006:127.0.0.1:6006 root@ssh.intern-ai.org.cn -p 38442
 ---
 
 ### 04 实践部署 浦语·灵笔2 模型
+
+**需要 50% A100 权限**
+
+#### 图文写作实战
+
+浦语·灵笔2 是基于 书生·浦语2 大语言模型研发的突破性的**图文多模态大模型**
+
+能力特点
+1. 自由指令输入的图文写作能力： 浦语·灵笔2 可以理解自由形式的图文指令输入，包括大纲、文章细节要求、参考图片等，为用户打造图文并貌的专属文章
+2. 准确的图文问题解答能力：浦语·灵笔2 具有海量图文知识，可以准确的回复各种图文问答难题
+3. 杰出的综合能力： 浦语·灵笔2-7B 基于 书生·浦语2-7B 模型
+
+![](Pics/InternLM028.png)
+
+选用 50% A100 进行开发
+
+```bash
+conda activate demo
+# 补充环境包
+pip install timm==0.4.12 sentencepiece==0.1.99 markdown2==2.4.10 xlsxwriter==3.1.2 gradio==4.13.0 modelscope==1.9.5
+
+
+cd /root/demo
+git clone https://gitee.com/internlm/InternLM-XComposer.git
+# git clone https://github.com/internlm/InternLM-XComposer.git
+cd /root/demo/InternLM-XComposer
+git checkout f31220eddca2cf6246ee2ddf8e375a40457ff626
+
+ln -s /root/share/new_models/Shanghai_AI_Laboratory/internlm-xcomposer2-7b /root/models/internlm-xcomposer2-7b
+ln -s /root/share/new_models/Shanghai_AI_Laboratory/internlm-xcomposer2-vl-7b /root/models/internlm-xcomposer2-vl-7b
+
+cd /root/demo/InternLM-XComposer
+python /root/demo/InternLM-XComposer/examples/gradio_demo_composition.py  \
+--code_path /root/models/internlm-xcomposer2-7b \
+--private \
+--num_gpus 1 \
+--port 6006
+```
+
+还是需要配置本地 terminal
+
+```bash
+# 从本地使用 ssh 连接 studio 端口
+# 将下方端口号 38374 替换成自己的端口号
+sudo ssh -CNg -L 6006:127.0.0.1:6006 root@ssh.intern-ai.org.cn -p 38374
+```
+
+浏览器输入 [url 链接 http://127.0.0.1:6006/](http://127.0.0.1:6006/)
+
+直接 submit 提交即可
+
+![](Pics/InternLM029.png)
+
+#### 图片理解实战
+
+```bash
+conda activate demo
+
+cd /root/demo/InternLM-XComposer
+python /root/demo/InternLM-XComposer/examples/gradio_demo_chat.py  \
+--code_path /root/models/internlm-xcomposer2-vl-7b \
+--private \
+--num_gpus 1 \
+--port 6006
+```
+
+上传图片
+
+输入 请分析一下图中内容
+
+
+![](Pics/InternLM030.png)
+
+不能在一次对话里面问多个图片
+
+![](Pics/InternLM031.png)
+
+clear history 才能正确生成
+
+![](Pics/InternLM032.png)
+
 
 
 ---
